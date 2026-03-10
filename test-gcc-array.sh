@@ -60,13 +60,19 @@ run_test \
 	"pass" \
 	$CFLAGS -Wno-error=array-bounds
 
-# Test 3: volatile fix with strict -Werror : must pass with no warnings
+# Test 3: original code with --param=min-pagesize=0 (tells GCC address 0 is valid)
+run_test \
+	"Original code, --param=min-pagesize=0 (no source change needed)" \
+	"pass" \
+	$CFLAGS --param=min-pagesize=0
+
+# Test 4: volatile fix with strict -Werror : must pass with no warnings
 run_test \
 	"Volatile fix, strict -Werror (proposed source fix)" \
 	"pass" \
 	$CFLAGS -DTEST_VOLATILE_FIX
 
-# Test 4: volatile fix with --param=min-pagesize=0 : must pass
+# Test 5: volatile fix + --param=min-pagesize=0 : must pass
 run_test \
 	"Volatile fix + --param=min-pagesize=0 (belt and suspenders)" \
 	"pass" \
